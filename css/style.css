@@ -1,0 +1,48 @@
+html,body{
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+#container{
+
+	height: 100%;
+	align-content: center;
+}
+
+
+.card{
+	
+	display: block;
+    text-align: center;
+    padding: 40px 40px;
+    width: 502px;
+    align-content: center;
+    margin: auto;
+
+	background-color: rgba(0,0,0,0.4) !important;
+}
+.title{
+	text-align: center;
+	color: white;
+	padding: 10px 10px;
+}
+.subtitle{
+	color: white;
+	padding: 10px;
+    margin: auto;
+}
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+form-control{
+	text-align: justify;
+	align-content: center;
+	color: red;
+}
+.login{
+	align-content: left;
+
+}

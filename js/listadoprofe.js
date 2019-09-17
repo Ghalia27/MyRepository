@@ -1,0 +1,132 @@
+/*let obj=new Usuario();
+let cerrar=document.getElementById('cerrar');
+cerrar.addEventListener("click",function(){
+	obj.deslogearUsuario();
+})*/
+
+
+//boton registrar
+let listado=document.getElementById('lista-contacto');
+let listado_personas=[];
+let btn_registrar=document.getElementById('btn-registrar');
+btn_registrar.addEventListener("click", function(){
+	console.log("ya");
+	let usuariosReg=document.getElementById('usuarioReg');
+    let datosUsuarios= new FormData(usuariosReg);
+    
+    //nombre, apellido y cel en un objeto
+	const usuarioJson = Object.fromEntries(datosUsuarios)
+
+	let registrousu="https://sminnova.com/recurso_clase/api/contacto/agregar";
+
+	let xhr= new XMLHttpRequest();
+	xhr.open("POST", registrousu);
+	xhr.send(datosUsuarios);
+    let temp1="";
+	xhr.onreadystatechange=function(){
+		if (xhr.readyState==4){
+			
+			if (xhr.status==200){
+			let resultado=JSON.parse(xhr.response);
+			console.log(resultado);
+				if (resultado.length>=1){
+                    
+                    //arreglo de objetos
+                    listado_personas.push(usuarioJson);
+                    listar();
+
+                }
+			}
+		}
+	}
+})
+
+function listar(){
+	
+	//let temporal=listado.innerHTML;
+	let temporal_elementos="";
+	for (let i = 0 ; i < listado_personas.length; i++) {
+		let item=listado_personas[i];
+
+        temporal_elementos=temporal_elementos+`<li class="mt-4 mb-4" onclick='pagar("${item.nombre}","${item.apellido}","${item.cel}" )'class="list-group-item">${item.nombre}  ${item.apellido}</li>`;
+
+	}
+	listado.innerHTML=temporal_elementos;
+
+
+}
+
+
+
+//let lista=document.getElementById("listado");
+async function obtenerListado(){
+
+
+let url="https://sminnova.com/recurso_clase/api/contacto/listado";
+let datos=new FormData();
+datos.append("id","133");
+let peticion=await fetch(url,{method:"POST",body:datos})
+let resultado=await peticion.json();
+console.log(resultado);
+let res=resultado instanceof Array
+console.log(res);
+let temp=""
+if(res){
+	for(item of resultado){
+			temp=temp+`<li onclick='pagar("${item.nombres}","${item.apellidos}","${item.telefono}" )' class="list-group-item">${item.nombres}  ${item.apellidos}</li>`;
+	}
+	listado.innerHTML=temp;
+}
+else{
+	listado.innerHTML='<li class="list-group-item">No tienes contactos registrados</li>';
+}
+}
+obtenerListado();
+
+
+
+function pagar(nombre,apellido,telefono){
+	$("#exampleModal").modal("show");
+	//console.log(nombre,apellido,telefono)
+
+	document.getElementById("inp-nombre-contacto").value=nombre + " " + apellido;
+
+	document.getElementById("inp-telefono-contacto").value=telefono;
+}
+
+
+let registrar=document.getElementById("btn-registrar");
+registrar.addEventListener("click",function(){
+	let nombre= document.getElementById("inp-nombre-contacto").value
+	let telefono=document.getElementById("inp-telefono-contacto").value
+	let pago=document.getElementById("inp-monto-pago").value
+	let fecha=Date.now();
+	//console.log(nombre,telefono,pago,fecha);
+	let datos=new FormData();
+	datos.append("nombres",nombre);
+	datos.append("telefono",telefono);
+	datos.append("monto",pago);
+	datos.append("fecha",fecha);
+	datos.append("id_usuario","133");
+
+let url="https://sminnova.com/recurso_clase/api/contacto/pago";
+let config={
+	method:"POST",
+	body:datos
+}
+fetch(url,config)
+.then((data)=>{return data.json()})
+.then((data)=>{
+
+	//console.log(data)
+		$("#exampleModal").modal("hide");
+});
+
+
+
+
+	/*let datos=new FormData(document.getElementById("form-pago"));
+	datos.append("id_usuario","24");
+	console.log(datos.get("nombre_completo"));
+*/
+})
