@@ -6,9 +6,13 @@ cerrar.addEventListener("click",function(){
 
 
 //boton registrar
+let usuario = new Usuario();
 let listado=document.getElementById('lista-contacto');
 let listado_personas=[];
 let btn_registrar=document.getElementById('btn-registrar');
+let id_usuario = usuario.obtenerIdUsuario();
+
+if (!usuario.estadoLogin()) window.location = '../html/NuevoLogin.html';
 
 obtenerListado();
 
@@ -16,7 +20,7 @@ btn_registrar.addEventListener("click", function(){
 	console.log("ya");
 	let usuariosReg=document.getElementById('usuarioReg');
   let datosUsuarios= new FormData(usuariosReg);
-	datosUsuarios.append("id_usuario","133");
+	datosUsuarios.append("id_usuario",id_usuario);
     
     //nombre, apellido y cel en un objeto
 	const usuarioJson = Object.fromEntries(datosUsuarios)
@@ -45,6 +49,7 @@ btn_registrar.addEventListener("click", function(){
 		}
 	}
 })
+
 /*
 function listar(){
 	
@@ -75,7 +80,7 @@ function dibujar(lista) {
 async function obtenerListado(){
 	let url="https://sminnova.com/recurso_clase/api/contacto/listado";
 	let datos=new FormData();
-	datos.append("id","133");
+	datos.append("id",id_usuario);
 
 	let peticion=await fetch(url,{method:"POST",body:datos})
 	let resultado=await peticion.json();
@@ -106,7 +111,7 @@ function pagar(nombre,apellido,telefono){
 }
 
 
-let registrar=document.getElementById("btn-registrar");
+let registrar=document.getElementById("btn-registrar-pago");
 registrar.addEventListener("click",function(){
 	let nombre= document.getElementById("inp-nombre-contacto").value
 	let telefono=document.getElementById("inp-telefono-contacto").value
@@ -118,7 +123,7 @@ registrar.addEventListener("click",function(){
 	datos.append("telefono",telefono);
 	datos.append("monto",pago);
 	datos.append("fecha",fecha);
-	datos.append("id_usuario","133");
+	datos.append("id_usuario",id_usuario);
 
 let url="https://sminnova.com/recurso_clase/api/contacto/pago";
 let config={
@@ -128,7 +133,7 @@ let config={
 fetch(url,config)
 .then((data)=>{return data.json()})
 .then((data)=>{
-
+		console.log('pago', data);
 	//oculta modal
 		$("#exampleModal").modal("hide");
 });

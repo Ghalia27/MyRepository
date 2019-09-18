@@ -1,7 +1,7 @@
 let obj=new Usuario();
 // validas que exista registro de login
 // si esta registrado te envia a la url como parametro
-obj.estadoLogin("../html/Listadopagoprofe.html");
+if (obj.estadoLogin()) window.location = "../html/ListadoContacto.html";
 
 
 let btn=document.getElementById('btn-login');
@@ -28,3 +28,6 @@ btn.addEventListener("click",function(){
 	
 
 })
+
+//desloger.addEventListener()
+//obj.deslogearUsuario();

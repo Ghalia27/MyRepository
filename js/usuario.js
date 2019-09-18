@@ -28,6 +28,9 @@ class Usuario{
 		return estado;
 
 	}
+	obtenerIdUsuario(){
+		return localStorage.usuario;
+	}
 	guardarUsuario(p_usuario,p_estado=true){
 		localStorage.usuario=p_usuario;
 		localStorage.login=p_estado;	
@@ -35,11 +38,10 @@ class Usuario{
 	deslogearUsuario(){
 		localStorage.login=false;
 	}
-	estadoLogin(url_destino){
+	estadoLogin(){
 		let estado=false;
 		if(localStorage.login=="true"){
 			estado=true;
-			window.location=url_destino
 		}
 		return estado;
 	}
@@ -50,13 +52,13 @@ class Usuario{
 				method:"POST",
 				body:datos_login
 			}
-		fetch(url_login,config)
+		fetch("https://sminnova.com/recurso_clase/api/usuario/login",config)
 			.then((data)=>{return data.json()})
 			.then((data)=>{
 				console.log(data.length)
 				if(data.length>=1){
-					//obj.guardarUsuario(data[0].correo);
-					window.location="../html/Listadopagoprofe.html"
+					obj.guardarUsuario(data[0].id);
+					window.location="../html/ListadoContacto.html"
                     console.log(data);
                     estado=true;
 				}
