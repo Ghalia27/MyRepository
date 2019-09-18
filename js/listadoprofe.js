@@ -30,7 +30,7 @@ btn_registrar.addEventListener("click", function(){
 	let xhr= new XMLHttpRequest();
 	xhr.open("POST", registrousu);
 	xhr.send(datosUsuarios);
-    let temp1="";
+   
 	xhr.onreadystatechange=function(){
 		if (xhr.readyState==4){
 			
@@ -39,9 +39,9 @@ btn_registrar.addEventListener("click", function(){
 			console.log(resultado);
 				if (resultado.length>=1){
                     //arreglo de objetos
-										listado_personas.unshift(usuarioJson);
-										let html = dibujar(listado_personas);
-										listado.innerHTML = html;
+					let html = dibujar(listado_personas);
+					listado_personas.unshift(usuarioJson);
+					listado.innerHTML = html;
                     //listar();
 
                 }
@@ -49,6 +49,30 @@ btn_registrar.addEventListener("click", function(){
 		}
 	}
 })
+//buscar 
+
+
+	let inp_lista=document.getElementById('inp-lista');
+	inp_lista.addEventListener("input", function(){
+		let busqueda=inp_lista.value;
+		console.log(busqueda);
+		let filtrado=listado_personas.filter(function (persona) {
+			let nombre_completo = (persona.nombres + " " + persona.apellidos).toLowerCase();
+			return nombre_completo.includes(busqueda.toLowerCase());
+		});
+		let li=dibujar(filtrado);
+		listado.innerHTML=li;
+	})
+	
+	 
+//deslogearse
+
+let desloguear=document.getElementById('desloguearse');
+desloguear.addEventListener("click", function(){
+	usuario.deslogearUsuario();
+	window.location="NuevoLogin.html";
+})
+
 
 /*
 function listar(){
@@ -125,24 +149,17 @@ registrar.addEventListener("click",function(){
 	datos.append("fecha",fecha);
 	datos.append("id_usuario",id_usuario);
 
-let url="https://sminnova.com/recurso_clase/api/contacto/pago";
-let config={
-	method:"POST",
-	body:datos
-}
-fetch(url,config)
-.then((data)=>{return data.json()})
-.then((data)=>{
-		console.log('pago', data);
-	//oculta modal
-		$("#exampleModal").modal("hide");
-});
+	let url="https://sminnova.com/recurso_clase/api/contacto/pago";
+	let config={
+		method:"POST",
+		body:datos
+	}
+	fetch(url,config)
+	.then((data)=>{return data.json()})
+	.then((data)=>{
+			console.log('pago', data);
+		//oculta modal
+			$("#exampleModal").modal("hide");
+	});
 
-
-
-
-	/*let datos=new FormData(document.getElementById("form-pago"));
-	datos.append("id_usuario","24");
-	console.log(datos.get("nombre_completo"));
-*/
 })

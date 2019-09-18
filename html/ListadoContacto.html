@@ -34,10 +34,18 @@
 
 
 <style>
+	body{
+		background-color:#EEEDED;
+	}
 	.fixed-add{
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
+	}
+	.fixed-top{
+	position: fixed;
+	top: 10px;
+	left: 1100px;
 	}
 </style>
 </head>
@@ -49,39 +57,48 @@
 			<div class="col-md-6 m-10px pt-5">
 				<h2 class="login100-form-title p-b-40">Listado de contactos</h2>
 				<form action="">
-					<div class="form-group">
-						<input type="text" class="form-control" >
+					<div class="input-group mb-5">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Ingrese nombre</span>
+						</div>
+						<input id="inp-lista"type="search" class="form-control" value="ghal" >
 					</div>
 					
-						<button class="btn btn-dark btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off">Buscar</button>
+						
 				
 				</form>
 				<ul id="lista-contacto" class="list-group mt-4">
 				  <!--<li class="list-group-item">1</li>-->
 				</ul>
+				
 				<div class="fixed-add">
-					<a href="historial.html" class="btn btn-warning btn-lg">Historial</a>
+					<a href="historial.html" class="btn btn-warning btn-lg">Ver historial</a>
 				</div>
-            </div>
-            <div class="col-md-6 m-10px pt-5">
+			</div>
+			
+            <div class="col-md-5 m-80px pt-5">
+
+				<div class="fixed-top">
+					<span id="desloguearse" class="txt3 bo1 hov1">Salir de la cuenta</span>
+				</div>
 
                 <h3 class="login100-form-title p-b-40"> Registro de Contacto</h3>
 				<form id="usuarioReg">
-					<div>
-						<label>Nombre</label>
-						<input id="inp-nombre" type="text" class="form-control" name="nombres" value="Ghalia">
+					<div class="wrap-input100  m-b-16">
+						
+						<input id="inp-nombre" type="text" class="input100" name="nombres" placeholder="Nombre">
 
 					</div>
 
-					<div>
-						<label>Apellido</label>
-						<input id="inp-apellido" type="text" class="form-control" name="apellidos" value="Rebaza">
+					<div class="wrap-input100  m-b-16">
+					
+						<input id="inp-apellido" type="text" class="input100" name="apellidos" placeholder="Apellido">
 
 					</div>
 
-					<div>
-						<label>Celular</label>
-						<input id="inp-celular"type="text" class="form-control" name="telefono" value="65463">
+					<div class="wrap-input100  m-b-16">
+						
+						<input id="inp-celular"type="text" class="input100" name="telefono" placeholder="Celular">
 
 					</div>
                     <div class="sticky-top mt-4">

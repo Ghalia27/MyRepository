@@ -40,9 +40,13 @@
 <style>
 	.fixed-add{
 	position: fixed;
-	bottom: 20px;
+	top: 20px;
 	right: 20px;
 	}
+	body{
+		background-color:#EEEDED;
+	}
+	
 </style>
 </head>
 <body>
@@ -50,26 +54,40 @@
 	
 	<div class="container">
 		<div class="row d-flex">
-			<div class="col-md-6 m-10px pt-5">
+			<div class="col-md-2 m-auto pt-5"></div>
+			<div class="col-md-8 m-100px pt-5">
+				<a  href="ListadoContacto.html" class="fixed-add btn btn-dark btn-lg">Regresar</a>
 				<h2 class="login100-form-title p-b-40">Historial</h2>
 				<form action="">
-					<div class="form-group">
-						<input type="text" class="form-control" >
+					<div class="input-group mb-5">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Ingrese búsqueda</span>
+						</div>
+						<input id="inp-busqueda" type="text" class="form-control" >
+						
+					
 					</div>
 					
-						<a  href="ListadoContacto.html" class="btn btn-dark btn-lg">Regresar</a>
+						
 				
 				</form>
-				<ul id="lista-contacto" class="list-group mt-4">
+				<ul id="lista-historial" class="list-group mt-4">
 				  <!--<li class="list-group-item">1</li>-->
 				</ul>
         
       
 		  </div>
+		  <div class="col-md-2 m-100px pt-5"></div>
     </div>
     
 
 
   </div>
+  
+  <script src="../js/usuario.js"></script>
+<!--
+  <script src="../js/listadoprofe.js"></script>-->
+  <script src="../js/historial.js"></script>
+
 </body>
 </html>
