@@ -9,10 +9,14 @@ cerrar.addEventListener("click",function(){
 let listado=document.getElementById('lista-contacto');
 let listado_personas=[];
 let btn_registrar=document.getElementById('btn-registrar');
+
+obtenerListado();
+
 btn_registrar.addEventListener("click", function(){
 	console.log("ya");
 	let usuariosReg=document.getElementById('usuarioReg');
-    let datosUsuarios= new FormData(usuariosReg);
+  let datosUsuarios= new FormData(usuariosReg);
+	datosUsuarios.append("id_usuario","133");
     
     //nombre, apellido y cel en un objeto
 	const usuarioJson = Object.fromEntries(datosUsuarios)
@@ -30,17 +34,18 @@ btn_registrar.addEventListener("click", function(){
 			let resultado=JSON.parse(xhr.response);
 			console.log(resultado);
 				if (resultado.length>=1){
-                    
                     //arreglo de objetos
-                    listado_personas.push(usuarioJson);
-                    listar();
+										listado_personas.unshift(usuarioJson);
+										let html = dibujar(listado_personas);
+										listado.innerHTML = html;
+                    //listar();
 
                 }
 			}
 		}
 	}
 })
-
+/*
 function listar(){
 	
 	//let temporal=listado.innerHTML;
@@ -48,40 +53,46 @@ function listar(){
 	for (let i = 0 ; i < listado_personas.length; i++) {
 		let item=listado_personas[i];
 
-        temporal_elementos=temporal_elementos+`<li class="mt-4 mb-4" onclick='pagar("${item.nombre}","${item.apellido}","${item.cel}" )'class="list-group-item">${item.nombre}  ${item.apellido}</li>`;
+    temporal_elementos=temporal_elementos+`<li class="mt-4 mb-4" onclick='pagar("${item.nombres}","${item.apellidos}","${item.telefono}" )'class="list-group-item">${item.nombres}  ${item.apellidos}</li>`;
 
 	}
 	listado.innerHTML=temporal_elementos;
 
 
 }
+*/
+function dibujar(lista) {
+	let temp = "";
+	for (item of lista) {
+		temp=temp+`<li onclick='pagar("${item.nombres}","${item.apellidos}","${item.telefono}" )' class="list-group-item">${item.nombres}  ${item.apellidos}</li>`;
+	}
+	return temp;
+}
 
 
 
 //let lista=document.getElementById("listado");
 async function obtenerListado(){
+	let url="https://sminnova.com/recurso_clase/api/contacto/listado";
+	let datos=new FormData();
+	datos.append("id","133");
 
+	let peticion=await fetch(url,{method:"POST",body:datos})
+	let resultado=await peticion.json();
 
-let url="https://sminnova.com/recurso_clase/api/contacto/listado";
-let datos=new FormData();
-datos.append("id","133");
-let peticion=await fetch(url,{method:"POST",body:datos})
-let resultado=await peticion.json();
-console.log(resultado);
-let res=resultado instanceof Array
-console.log(res);
-let temp=""
-if(res){
-	for(item of resultado){
-			temp=temp+`<li onclick='pagar("${item.nombres}","${item.apellidos}","${item.telefono}" )' class="list-group-item">${item.nombres}  ${item.apellidos}</li>`;
+	console.log(resultado);
+	let res=resultado instanceof Array
+	console.log(res);
+	let temp=""
+	if(res){
+		listado_personas = [...resultado];
+		let html = dibujar(resultado);
+		listado.innerHTML = html;
 	}
-	listado.innerHTML=temp;
+	else{
+		listado.innerHTML='<li class="list-group-item">No tienes contactos registrados</li>';
+	}
 }
-else{
-	listado.innerHTML='<li class="list-group-item">No tienes contactos registrados</li>';
-}
-}
-obtenerListado();
 
 
 
@@ -118,7 +129,7 @@ fetch(url,config)
 .then((data)=>{return data.json()})
 .then((data)=>{
 
-	//console.log(data)
+	//oculta modal
 		$("#exampleModal").modal("hide");
 });
 
