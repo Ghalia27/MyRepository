@@ -32,10 +32,16 @@ obtenerListadoHistorial();
 function dibujar(lista) {
 	let temp = "";
 	for (item of lista) {
-		temp=temp+`<li class="list-group-item">${item.nombre_contacto} &nbsp;&nbsp;&nbsp;&nbsp; ${item.telefono} &nbsp;&nbsp;&nbsp;&nbsp; S/${item.monto}</li>`;
+		temp=temp+`<tr><th scope="row">${item.id} </th>
+                    <td>${item.nombre_contacto} </td>
+                    <td>${item.telefono} </td>
+                    <td>${item.monto}</td></tr>`
 	}
+				
 	return temp;
 }
+
+
 function comparar(a,b) {
     if (a.fecha < b.fecha) return 1
     else if (a.fecha > b.fecha) return -1
