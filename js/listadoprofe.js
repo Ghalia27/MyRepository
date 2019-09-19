@@ -5,7 +5,7 @@ cerrar.addEventListener("click",function(){
 })*/
 
 
-//boton registrar
+//boton registrar contacto
 let usuario = new Usuario();
 let listado=document.getElementById('lista-contacto');
 let listado_personas=[];
@@ -37,14 +37,16 @@ btn_registrar.addEventListener("click", function(){
 			if (xhr.status==200){
 			let resultado=JSON.parse(xhr.response);
 			console.log(resultado);
-				if (resultado.length>=1){
-                    //arreglo de objetos
-					let html = dibujar(listado_personas);
-					listado_personas.unshift(usuarioJson);
-					listado.innerHTML = html;
-                    //listar();
 
-                }
+			//arreglo de objetos
+
+			listado_personas.unshift(usuarioJson);
+			let html = dibujar(listado_personas);
+			listado.innerHTML = html;
+			//listar();
+
+					
+				
 			}
 		}
 	}
