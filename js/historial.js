@@ -20,13 +20,28 @@ async function obtenerListadoHistorial(){
     
 	if(res){
         listado_historial=[...resultado];
-		listado_historial.sort(comparar);
+        for(item of listado_historial){
+            item.fecha=convierteFecha(parseInt(item.fecha, 10));
+            
+        }
+
+    	listado_historial.sort(comparar);
 		let html = dibujar(listado_historial);
 		historial.innerHTML = html;
 	}
 	else{
 		historial.innerHTML='<li class="list-group-item">No tiene historial</li>';
 	}
+}
+
+
+// function fecha
+function convierteFecha(tiempo){
+    let f=new Date(tiempo);
+    let day= f.getDate();
+    let month=f.getMonth()+1;
+    let year=f.getFullYear();
+    return `${day}/${month}/${year}` ;
 }
 obtenerListadoHistorial();
 function dibujar(lista) {
@@ -35,7 +50,8 @@ function dibujar(lista) {
 		temp=temp+`<tr><th scope="row">${item.id} </th>
                     <td>${item.nombre_contacto} </td>
                     <td>${item.telefono} </td>
-                    <td>${item.monto}</td></tr>`
+                    <td>${item.monto}</td>
+                    <td>${item.fecha}</td></tr>`
 	}
 				
 	return temp;
