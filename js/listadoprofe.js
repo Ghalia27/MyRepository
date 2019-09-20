@@ -5,17 +5,18 @@ cerrar.addEventListener("click",function(){
 })*/
 
 
-//boton registrar contacto
+
 let usuario = new Usuario();
 let listado=document.getElementById('lista-contacto');
-let listado_personas=[];
+let listado_personas=[]; //lista vacia para llenar los contactos
 let btn_registrar=document.getElementById('btn-registrar');
-let id_usuario = usuario.obtenerIdUsuario();
+let id_usuario = usuario.obtenerIdUsuario(); //id que viene de la clase usuario
 
 if (!usuario.estadoLogin()) window.location = '../html/NuevoLogin.html';
 
 obtenerListado();
 
+//boton registrar contacto
 btn_registrar.addEventListener("click", function(){
 	console.log("ya");
 	let usuariosReg=document.getElementById('usuarioReg');
@@ -39,59 +40,37 @@ btn_registrar.addEventListener("click", function(){
 			console.log(resultado);
 
 			//arreglo de objetos
-
-			listado_personas.unshift(usuarioJson);
+			listado_personas.unshift(usuarioJson);//coloca el contacto ingresado en el inicio
 			let html = dibujar(listado_personas);
-			listado.innerHTML = html;
-			//listar();
-
-					
-				
+			listado.innerHTML = html;	
 			}
 		}
 	}
 })
-//buscar 
 
 
-	let inp_lista=document.getElementById('inp-lista');
-	inp_lista.addEventListener("input", function(){
-		let busqueda=inp_lista.value;
-		console.log(busqueda);
-		let filtrado=listado_personas.filter(function (persona) {
-			let nombre_completo = (persona.nombres + " " + persona.apellidos).toLowerCase();
-			return nombre_completo.includes(busqueda.toLowerCase());
-		});
-		let li=dibujar(filtrado);
-		listado.innerHTML=li;
-	})
+//búsqueda de contacto
+let inp_lista=document.getElementById('inp-lista');
+inp_lista.addEventListener("input", function(){
+	let busqueda=inp_lista.value;
+	console.log(busqueda);
+	let filtrado=listado_personas.filter(function (persona) {
+		let nombre_completo = (persona.nombres + " " + persona.apellidos).toLowerCase();
+		return nombre_completo.includes(busqueda.toLowerCase());
+	});
+	let li=dibujar(filtrado);
+	listado.innerHTML=li;
+})
 	
 	 
-//deslogearse
-
+//desloguearse
 let desloguear=document.getElementById('desloguearse');
 desloguear.addEventListener("click", function(){
 	usuario.deslogearUsuario();
 	window.location="NuevoLogin.html";
 })
 
-
-/*
-function listar(){
-	
-	//let temporal=listado.innerHTML;
-	let temporal_elementos="";
-	for (let i = 0 ; i < listado_personas.length; i++) {
-		let item=listado_personas[i];
-
-    temporal_elementos=temporal_elementos+`<li class="mt-4 mb-4" onclick='pagar("${item.nombres}","${item.apellidos}","${item.telefono}" )'class="list-group-item">${item.nombres}  ${item.apellidos}</li>`;
-
-	}
-	listado.innerHTML=temporal_elementos;
-
-
-}
-*/
+//función reutilizable para dibujar la lista
 function dibujar(lista) {
 	let temp = "";
 	for (item of lista) {
@@ -100,9 +79,7 @@ function dibujar(lista) {
 	return temp;
 }
 
-
-
-//let lista=document.getElementById("listado");
+//obtener el listado, síncrono
 async function obtenerListado(){
 	let url="https://sminnova.com/recurso_clase/api/contacto/listado";
 	let datos=new FormData();
@@ -126,19 +103,20 @@ async function obtenerListado(){
 }
 
 
-
+//viene del onclick pagar de la lista
 function pagar(nombre,apellido,telefono){
+	//mostrar el modal
 	$("#exampleModal").modal("show");
+
 	//console.log(nombre,apellido,telefono)
-
+	//mostrar el nombre apellido y telefono 
 	document.getElementById("inp-nombre-contacto").value=nombre + " " + apellido;
-
 	document.getElementById("inp-telefono-contacto").value=telefono;
 }
 
-
-let registrar=document.getElementById("btn-registrar-pago");
-registrar.addEventListener("click",function(){
+//function para registrar pago
+let registrarpago=document.getElementById("btn-registrar-pago");
+registrarpago.addEventListener("click",function(){
 	let nombre= document.getElementById("inp-nombre-contacto").value
 	let telefono=document.getElementById("inp-telefono-contacto").value
 	let pago=document.getElementById("inp-monto-pago").value
@@ -160,7 +138,7 @@ registrar.addEventListener("click",function(){
 	.then((data)=>{return data.json()})
 	.then((data)=>{
 			console.log('pago', data);
-		//oculta modal
+			//oculta modal
 			$("#exampleModal").modal("hide");
 	});
 

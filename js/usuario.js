@@ -17,7 +17,6 @@ class Usuario{
 		let estado=false;
 		let correo=data_formulario.get("correo");
         let password=data_formulario.get("password");
-        console.log("entro a datosloginvalidar", correo, password);
         console.log(correo);
         console.log(password);
 

@@ -2,12 +2,14 @@
 <html>
 <head>
 	<title></title>
+	<title>Listado de contactos</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="../plantilla/images/icons/favicon.ico"/>
@@ -37,6 +39,13 @@
 	body{
 		background-color:#EEEDED;
 	}
+	.heading{
+		color:white;
+		text-align: center;
+	}
+	.modal-header{
+		background-color: black;
+	}
 	.fixed-add{
 	position: fixed;
 	bottom: 20px;
@@ -56,13 +65,12 @@
 		<div class="row d-flex">
 			<div class="col-md-6 m-10px pt-5">
 				<h2 class="login100-form-title p-b-40">Listado de contactos</h2>
-				<form action="">
-					<div class="input-group mb-5">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon1">Ingrese nombre</span>
-						</div>
-						<input id="inp-lista"type="search" class="form-control" value="ghal" >
-					</div>
+				<form id="navbar-1"  role="search">
+					
+						<div  class="inner-addon left-addon">
+								<i class="glyphicon glyphicon-search"></i>
+								<input id="inp-lista"type="text" class="form-control" placeholder="Buscar contacto">
+						  </div>
 					
 						
 				
@@ -79,7 +87,7 @@
             <div class="col-md-5 m-80px pt-5">
 
 				<div class="fixed-top">
-					<span id="desloguearse" class="txt3 bo1 hov1">Salir de la cuenta</span>
+				<span id="desloguearse" class="txt3 bo1 hov1">Salir de la cuenta</span>
 				</div>
 
                 <h3 class="login100-form-title p-b-40"> Registro de Contacto</h3>
@@ -118,7 +126,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registro Pago</h5>
+        <h5 class="heading" id="exampleModalLabel">Registro Pago</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Historial de transacciones</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	
@@ -41,65 +41,66 @@
 	.fixed-add{
 	position: fixed;
 	top: 20px;
-	right: 20px;
+	left: 20px;
+	}
+	.fixed-top{
+	position: fixed;
+	top: 20px;
+	left: 1100px;
 	}
 	body{
 		background-color:#EEEDED;
 	}
-	
+	th{
+		background-size: 10px;
+		font-family:sans-serif;
+	}
+	.table{
+		background-color:white;
+	}
 </style>
 </head>
 <body>
-
-	
 	<div class="container">
 		<div class="row d-flex">
 			<div class="col-md-2 m-auto pt-5"></div>
-			<div class="col-md-8 m-100px pt-5">
-				<a  href="ListadoContacto.html" class="fixed-add btn btn-dark btn-lg">Regresar</a>
-				<h2 class="login100-form-title p-b-40">Historial</h2>
-				<form action="">
-					<div class="input-group mb-5">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon1">Ingrese búsqueda</span>
-						</div>
-						<input id="inp-busqueda" type="text" class="form-control" >
-						
-					
-					</div>
-					
-					
-				
-				</form>
+				<div class="col-md-8 m-100px pt-5">
+					<a  href="ListadoContacto.html" class="fixed-add btn btn-secondary btn-lg">Regresar</a>
+					<h2 class="login100-form-title p-b-40">Historial</h2>
 
+					<form id="navbar-1"  role="search">
+						<div  class="inner-addon left-addon">
+							<i class="glyphicon glyphicon-search"></i>
+							<input  id="inp-busqueda" type="text" class="form-control" placeholder="Buscar">
+						</div>
+					</form>
+					<br>
 					<table class="table table-bordered">
-							<thead  class="thead-dark">
-									<tr>
-									  <th scope="col">Id</th>
-									  <th scope="col">Nombre</th>
-									  <th scope="col">Teléfono</th>
-									  <th scope="col">Monto</th>
-									  <th scope="col">Fecha</th>
-									</tr>
-								  </thead>
+						<thead  class="thead-dark">
+							<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Teléfono</th>
+							<th scope="col">Monto</th>
+							<th scope="col">Fecha</th>
+							</tr>
+						</thead>
 						<tbody id="lista-historial" >
 							
 						</tbody>
 
 					</table>
 
-				<ul class="list-group mt-4">
-				  <!--<li class="list-group-item">1</li>-->
-				</ul>
-        
-      
-		  </div>
-		  <div class="col-md-2 m-100px pt-5"></div>
+					
+				<div class="fixed-top">
+						<span id="desloguearse" class="txt3 bo1 hov1">Salir de la cuenta</span>
+						</div>
+		 	    </div>
+		    <div class="col-md-2 m-100px pt-5">
+				
+			</div>
+   		</div>
     </div>
-    
-
-
-  </div>
   
   <script src="../js/usuario.js"></script>
 <!--
