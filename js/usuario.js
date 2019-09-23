@@ -57,8 +57,18 @@ class Usuario{
 				console.log(data.length)
 				if(data.length>=1){
 					obj.guardarUsuario(data[0].id);
-					window.location="../html/ListadoContacto.html"
-                    console.log(data);
+					
+					if (data instanceof Array){
+						console.log("arreglo")
+						console.log(data);
+						window.location="../html/ListadoContacto.html"
+						
+					}else {
+						alert("Usuario incorrecto\nVuelva a ingresar usuario y contraseña");
+						console.log("no es arreglo");
+						localStorage.login=false;
+					}
+					
                     estado=true;
 				}
 				else{

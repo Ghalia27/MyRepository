@@ -18,6 +18,7 @@ btn.addEventListener("click",function(){
 	if(obj.datosLoginValidar(datos_login)){
 		let estadoLogin=obj.loginConusltar(datos_login);
 		console.log("validar");
+		
 		console.log(datos_login);
 		console.log(estadoLogin);
 	}else{
